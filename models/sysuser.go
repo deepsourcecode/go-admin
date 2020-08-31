@@ -31,6 +31,7 @@ type PassWord struct {
 	Password string `gorm:"size:128" json:"password"`
 }
 
+// 用于登录的模型信息
 type LoginM struct {
 	UserName
 	PassWord
@@ -40,6 +41,7 @@ type SysUserId struct {
 	UserId int `gorm:"primary_key;AUTO_INCREMENT"  json:"userId"` // 编码
 }
 
+// SysUserB 存放sys_user模型具体信息
 type SysUserB struct {
 	NickName  string `gorm:"size:128" json:"nickName"` // 昵称
 	Phone     string `gorm:"size:11" json:"phone"`     // 手机号
@@ -194,6 +196,7 @@ func (e *SysUser) GetList() (SysUserView []SysUserView, err error) {
 	return
 }
 
+// GetPage SysUser数据的分页查询
 func (e *SysUser) GetPage(pageSize int, pageIndex int) ([]SysUserPage, int, error) {
 	var doc []SysUserPage
 	table := orm.Eloquent.Select("sys_user.*,sys_dept.dept_name").Table(e.TableName())
@@ -223,9 +226,11 @@ func (e *SysUser) GetPage(pageSize int, pageIndex int) ([]SysUserPage, int, erro
 	}
 	var count int
 
+	// 分页查询数据
 	if err := table.Offset((pageIndex - 1) * pageSize).Limit(pageSize).Find(&doc).Error; err != nil {
 		return nil, 0, err
 	}
+	// 计算有效数据量
 	table.Where("sys_user.deleted_at IS NULL").Count(&count)
 	return doc, count, nil
 }
