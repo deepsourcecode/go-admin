@@ -3,12 +3,8 @@ package api
 import (
 	"context"
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 	"go-admin/database"
 	"go-admin/global"
-	"go-admin/jobs"
 	mycasbin "go-admin/pkg/casbin"
 	"go-admin/pkg/logger"
 	"go-admin/router"
@@ -19,6 +15,10 @@ import (
 	"os"
 	"os/signal"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var (
@@ -75,12 +75,10 @@ func run() error {
 		Addr:    config.ApplicationConfig.Host + ":" + config.ApplicationConfig.Port,
 		Handler: r,
 	}
-	go func() {
-		jobs.InitJob()
-		jobs.Setup()
-
-	}()
-
+	// go func() {
+	// 	jobs.InitJob()
+	// 	jobs.Setup()
+	// }()
 
 	go func() {
 		// 服务连接
