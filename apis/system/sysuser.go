@@ -1,13 +1,14 @@
 package system
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/gin-gonic/gin/binding"
-	"github.com/google/uuid"
 	"go-admin/global"
 	"go-admin/models"
 	"go-admin/tools"
 	"go-admin/tools/app"
+
+	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
+	"github.com/google/uuid"
 )
 
 // @Summary 列表用户信息数据
