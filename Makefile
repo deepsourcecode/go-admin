@@ -1,6 +1,7 @@
 PROJECT:=go-admin
 
 .PHONY: build
+
 build:
 	CGO_ENABLED=0 go build -o go-admin main.go
 build-sqlite:
@@ -12,3 +13,6 @@ build-sqlite:
 #.PHONY: docker
 #docker:
 #	docker build . -t go-admin:latest
+
+run:
+	./go-admin server -c config/settings.dev.yml -p 8000 -m dev
