@@ -1,8 +1,9 @@
 package app
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 // 失败数据处理
@@ -35,6 +36,7 @@ func PageOK(c *gin.Context, result interface{}, count int, pageIndex int, pageSi
 	if msg != "" {
 		res.Msg = msg
 	}
+
 	c.JSON(http.StatusOK, res.ReturnOK())
 }
 
